@@ -7,7 +7,6 @@
   terms found in the Website https://initappz.com/license
   Copyright and Good Faith Purchasers © 2023-present initappz.
 */
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +18,3 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::prefix('API')->group(function () {
-    Route::get('/', function () {
-        return [
-            'app' => 'Foodies Ionic 7 API',
-            'version' => '1.0.0',
-        ];
-    });
-});
