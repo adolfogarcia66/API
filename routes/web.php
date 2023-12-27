@@ -19,10 +19,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return [
-        'app' => 'Foodies Ionic 7 API',
-        'version' => '1.0.0',
-    ];
+Route::prefix('API')->group(function () {
+    Route::get('/', function () {
+        return [
+            'app' => 'Foodies Ionic 7 API',
+            'version' => '1.0.0',
+        ];
+    });
 });
