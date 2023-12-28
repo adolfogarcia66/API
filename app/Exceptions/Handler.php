@@ -7,13 +7,13 @@
   terms found in the Website https://initappz.com/license
   Copyright and Good Faith Purchasers © 2023-present initappz.
 */
+
 namespace App\Exceptions;
-use Illuminate\Validation\ValidationException;
+
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -24,7 +24,6 @@ class Handler extends ExceptionHandler
      * @var array<class-string<\Throwable>, \Psr\Log\LogLevel::*>
      */
     protected $levels = [
-        //
     ];
 
     /**
@@ -33,7 +32,6 @@ class Handler extends ExceptionHandler
      * @var array<int, class-string<\Throwable>>
      */
     protected $dontReport = [
-        //
     ];
 
     /**
@@ -47,45 +45,45 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    /**
+    /*
      * Register the exception handling callbacks for the application.
      *
      * @return void
      */
-    public function register()
-    {
-        $this->renderable(function(Throwable $e, $request) {
-            return $this->handleException($request, $e);
-        });
-    }
+    // public function register()
+    // {
+    //     $this->renderable(function(Throwable $e, $request) {
+    //         return $this->handleException($request, $e);
+    //     });
+    // }
 
-    public function handleException($request, Throwable $exception)
-    {
-        if ($exception instanceof ValidationException) {
-            $json = [
-                'error' => $exception->validator->errors(),
-                'status_code' => $exception->getStatusCode()
-            ];
-        } elseif ($exception instanceof AuthorizationException) {
-            $json = [
-                'error' => 'You are not allowed to do this action.',
-                'status_code' => 403
-            ];
-        } elseif ($exception instanceof NotFoundHttpException) {
-            $json = [
-                'error' => 'Sorry, the page you are looking for could not be found.',
-                'status_code' => 403,
-            ];
-        }
-        else {
-            $json = [
-                'error' => (app()->environment() !== 'production')
-                    ? $exception->getMessage()
-                    : 'An error has occurred.',
-                'status_code' => $exception->getStatusCode()
-            ];
-        }
+    // public function handleException($request, Throwable $exception)
+    // {
+    //     if ($exception instanceof ValidationException) {
+    //         $json = [
+    //             'error' => $exception->validator->errors(),
+    //             'status_code' => $exception->getStatusCode()
+    //         ];
+    //     } elseif ($exception instanceof AuthorizationException) {
+    //         $json = [
+    //             'error' => 'You are not allowed to do this action.',
+    //             'status_code' => 403
+    //         ];
+    //     } elseif ($exception instanceof NotFoundHttpException) {
+    //         $json = [
+    //             'error' => 'Sorry, the page you are looking for could not be found.',
+    //             'status_code' => 403,
+    //         ];
+    //     }
+    //     else {
+    //         $json = [
+    //             'error' => (app()->environment() !== 'production')
+    //                 ? $exception->getMessage()
+    //                 : 'An error has occurred.',
+    //             'status_code' => $exception->getStatusCode()
+    //         ];
+    //     }
 
-        return response()->json($json, $exception->getStatusCode());
-    }
+    //     return response()->json($json, $exception->getStatusCode());
+    // }
 }
